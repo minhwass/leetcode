@@ -1,5 +1,41 @@
 class Solution {
+    
     public boolean canFinish(int numCourses, int[][] prerequisites) {
+        ArrayList<Integer>[] adjList = new ArrayList[numCourses];
+        boolean[] visiting = new boolean[numCourses];
+        boolean[] finished = new boolean[numCourses];
+        for(int i = 0 ; i < numCourses; i++){
+            adjList[i] = new ArrayList<>();
+        }
+
+        for(int i = 0 ; i < prerequisites.length; i++){
+            adjList[prerequisites[i][1]].add(prerequisites[i][0]);
+        }
+
+        for(int i = 0 ; i < numCourses; i++){
+            if(!dfs(adjList,visiting,finished, i)) return false;
+        }
+        return true;
+    }
+    
+    private boolean dfs(ArrayList<Integer> [] adjList, boolean[] visiting, boolean[] finished,  int course){
+        if(finished[course]) return true;
+        if(visiting[course]) return false; 
+
+        visiting[course] = true;
+        for(int i = 0 ; i < adjList[course].size(); i++){
+            if(!dfs(adjList, visiting, finished, adjList[course].get(i))){
+                return false;
+            }
+        }
+        finished[course] = true;
+        visiting[course] = false;
+        return true;
+    }
+    
+    
+    //bfs version 
+    public boolean canFinishBFS(int numCourses, int[][] prerequisites) {
         Queue<Course> coursesToTake = new LinkedList<>();
         Queue<Course> completed = new LinkedList<>();
         Course [] courses = new Course[numCourses];
