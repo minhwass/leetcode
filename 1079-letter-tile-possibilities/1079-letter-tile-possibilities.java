@@ -1,4 +1,28 @@
 class Solution {
+    
+    public int numTilePossibilities(String tiles) {
+        int [] charCounts = new int[26];
+        for(char c : tiles.toCharArray()){
+            charCounts[c-'A']++;
+        }
+        return dfs(charCounts);
+    }
+    
+    int dfs(int [] charCounts){
+        int count = 0; 
+        for(int i = 0 ; i < charCounts.length; i++){
+            if(charCounts[i] > 0){
+                count++;
+                charCounts[i]--;
+                count += dfs(charCounts);
+                charCounts[i]++;
+            }
+        }
+        return count;
+    }
+    
+    
+    /* level by level 
     Set<ArrayList<Character>> seqSet = new HashSet<>();
     
     public int numTilePossibilities(String tiles) {
@@ -23,7 +47,7 @@ class Solution {
                     seq.remove(count);
                     used[i] = false;
                 }
-            }
+            
         }
-    }
+    }*/
 }
