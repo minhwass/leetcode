@@ -5,12 +5,14 @@ class Solution {
         if(nums == null || nums.length < 3) return ans;
         Arrays.sort(nums);
         for(int i = 0 ; i < nums.length; i++){
+            if(nums[i] > 0) break;
             if(i > 0 && nums[i] == nums[i-1]) continue;
+            
             int cur = nums[i];
-            if(cur > 0) break;
             int left = i+1; 
             int right = nums.length-1;
             int complement = 0 - nums[i];
+            
             while(left < right){
                 while(left < nums.length && left != i+1 && nums[left] == nums[left-1]) left++;
                 while(right >= 0 && right < nums.length-1 && nums[right] == nums[right+1]) right--;
