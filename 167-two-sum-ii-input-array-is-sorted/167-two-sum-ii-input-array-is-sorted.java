@@ -4,8 +4,9 @@ class Solution {
         int right = numbers.length-1;
         
         while(left < right){
-            if(numbers[right] + numbers[left] == target) return new int[]{left +1 , right +1};
-            else if (numbers[right] + numbers[left] > target ) right--;
+            int twoSum = numbers[right] + numbers[left];
+            if(twoSum == target) return new int[]{left +1 , right +1};
+            else if (twoSum > target ) right--;
             else{
                 left++;
             }
