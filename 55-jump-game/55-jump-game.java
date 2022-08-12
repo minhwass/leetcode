@@ -8,8 +8,7 @@ class Solution {
                 dest = i;
             }
         }
-        if(dest == 0) return true;
-        else return false;
+        return dest == 0;
     }
     
     /*
