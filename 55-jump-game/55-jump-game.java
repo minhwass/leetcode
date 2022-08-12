@@ -1,4 +1,18 @@
 class Solution {
+    //greedy way 
+    public boolean canJump(int[] nums) {
+        int dest = nums.length-1; 
+        for(int i = nums.length-2; i >= 0; i--){
+            int dist = dest - i;
+            if(nums[i] >= dist){
+                dest = i;
+            }
+        }
+        if(dest == 0) return true;
+        else return false;
+    }
+    
+    /*
     public boolean canJump(int[] nums) {
         int dest = nums.length-1;
         boolean [] memoCanVisit = new boolean[nums.length];
@@ -16,5 +30,5 @@ class Solution {
             if(canJump(nums, memoCanVisit, start+i, dest)) return true;
         }
         return memoCanVisit[start] = false;
-    }
+    }*/
 }
